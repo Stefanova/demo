@@ -95,7 +95,7 @@ function userAddSuccess(user) {
 
 function renameSurnameClick() {
    $.ajax({
-      url: 'http://localhost:8080/api/users/lastname',
+      url: 'http://localhost:8080/api/users',
       type: 'PUT',
       success: function (users) {
          userChangeLastname(users);
@@ -107,41 +107,5 @@ function renameSurnameClick() {
 }
 
 function userChangeLastname(users) {
-   let completedRequests = 0;
-   let totalUsers = users.length;
-
-   if (totalUsers === 0) {
-      alert("Нет пользователей для обновления");
-      return;
-   }
-
-   users.forEach(function(user) {
-      // Сохраняем оригинальную фамилию на случай ошибки
-      const originalLastname = user.lastname;
-      user.lastname = "дыав";
-
-      $.ajax({
-         url: 'http://localhost:8080/api/users/' + user.id,
-         type: 'PUT',
-         contentType: "application/json;charset=utf-8",
-         data: JSON.stringify(user),
-         success: function() {
-            completedRequests++;
-            updateProgress(completedRequests, totalUsers);
-
-            if (completedRequests === totalUsers) {
-               refreshUserList();
-            }
-         },
-         error: function(request, message, error) {
-            console.error("Ошибка обновления пользователя:", user.id);
-            completedRequests++;
-
-            if (completedRequests === totalUsers) {
-               refreshUserList();
-            }
-         }
-      });
-   });
-}
+    $("#lastname").val("Stefanova-Razumnaya");
 }

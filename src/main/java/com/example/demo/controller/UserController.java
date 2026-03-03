@@ -42,10 +42,10 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/users/lastname")
+    @RequestMapping("/users")
     public ResponseEntity<UserInfo> changeLastname(@RequestBody UserInfo userInfo) {
-        userRepository.save(new UserEntity(userInfo.getFirstName(), "Stefanova-Razumnaya"));
-        return ResponseEntity.ok(new UserInfo(userInfo.getFirstName(), "Stefanova-Razumnaya"));
+        userRepository.save(new UserEntity(userInfo.getFirstName(), userInfo.getLastName()));
+        return ResponseEntity.ok(new UserInfo(userInfo.getFirstName(), userInfo.getLastName()));
     }
 
 }
